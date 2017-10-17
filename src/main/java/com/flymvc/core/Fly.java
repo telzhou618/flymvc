@@ -68,28 +68,24 @@ public class Fly {
 		return fly;
 	}
 	
-	/**
-	 * 添加路由
-	 * @param uri
-	 * @param controller
-	 * @param methodName
-	 */
-	public void addRoute(String uri,Class<?> controller,String methodName){
+	public void addRoute(String uri,Object controller,String methodName){
 		try {
-			Object object =	 controller.newInstance(); //有弊端，实例化对象多了
-			try {
-				//Method method= controller.getMethod(methodName); //xxx
-				Method method= MethodUtil.getMethod(controller,methodName);
-				this.routeMap.addRoute(new Route(uri, object, method));
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			Method method = MethodUtil.getMethod(controller.getClass(), methodName);
+			if(routeMap.getRoute(uri)!=null){
+				throw new RuntimeException(controller.getClass().getSimpleName()+"."+method.getName()+"() ethod too more.");
 			}
-		  
-		} catch (InstantiationException | IllegalAccessException e) {
+			this.routeMap.addRoute(new Route(uri, controller, method));
+		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+	
+	public void addRoute(String uri,Object controller){
+		Method[] methods = controller.getClass().getDeclaredMethods();
+		for(Method method : methods){
+			this.addRoute(uri + "/" +method.getName(), controller, method.getName());
+		}
+	}
+	
 }

@@ -13,7 +13,7 @@ public class MethodUtil {
 	 */
 	public static Method getMethod(Class<?> controller, String methodName) throws NoSuchMethodException {
 		// TODO Auto-generated method stub
-		Method[] methods = controller.getMethods();
+		Method[] methods = controller.getDeclaredMethods();
 		for(Method method : methods){
 			if(method.getName().equals(methodName)){
 				return method;

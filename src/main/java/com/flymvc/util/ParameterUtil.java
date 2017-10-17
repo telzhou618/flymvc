@@ -30,7 +30,7 @@ public class ParameterUtil {
 	 * @param controller
 	 * @return
 	 */
-	public static List<Param> parseParams(Method method, Object controller) {
+	public static List<Param> parseParams(Method method, Object bean) {
 		// TODO Auto-generated method stub
 
 		Class<?>[] parameterTypes = method.getParameterTypes();
@@ -38,7 +38,7 @@ public class ParameterUtil {
 		ClassPool pool = ClassPool.getDefault();
 
 		try {
-			CtClass cc = pool.get(controller.getClass().getName());
+			CtClass cc = pool.get(bean.getClass().getName());
 			CtMethod cm = cc.getDeclaredMethod(method.getName());
 			// 使用javaassist的反射方法获取方法的参数名
 			MethodInfo methodInfo = cm.getMethodInfo();
