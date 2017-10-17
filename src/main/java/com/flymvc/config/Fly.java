@@ -1,8 +1,7 @@
-package com.flymvc.core;
+package com.flymvc.config;
 
 import java.lang.reflect.Method;
 
-import com.flymvc.config.FlyConfig;
 import com.flymvc.render.JspRender;
 import com.flymvc.render.Render;
 import com.flymvc.route.Route;
@@ -11,18 +10,23 @@ import com.flymvc.util.MethodUtil;
 
 public class Fly {
 	
-	private static Fly  fly = null;
-	
 	/**
-	 * 配置文件
+	 * 默认配置
 	 */
 	private FlyConfig flyConfig;
+	
 	/**
 	 * 路由
 	 */
 	private RouteMatcher routeMatcher;
-	
+	/**
+	 * 渲染器
+	 */
 	private Render render;
+	
+	
+	private static Fly  fly = null;
+	
 	
 	public FlyConfig getFlyConfig() {
 		return flyConfig;
@@ -52,9 +56,9 @@ public class Fly {
 	 * 私有化构造
 	 */
 	private Fly() {
-		this.flyConfig = new FlyConfig();
 		this.routeMatcher = new RouteMatcher();
 		this.render = new JspRender();
+		this.flyConfig = new FlyConfig();
 	}
 	
 	/**
@@ -87,5 +91,4 @@ public class Fly {
 			this.addRoute(uri + "/" +method.getName(), controller, method.getName());
 		}
 	}
-	
 }

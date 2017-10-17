@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.flymvc.anno.ResponsJson;
 import com.flymvc.bean.Param;
+import com.flymvc.config.Fly;
 import com.flymvc.render.Render;
 import com.flymvc.route.Route;
 import com.flymvc.util.AjaxUtil;
@@ -29,26 +30,23 @@ import com.flymvc.util.RequestUtil;
  */
 public class FlyMvcServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	private Fly fly;
 
 	private static final Logger logger = Logger.getLogger(FlyMvcServlet.class);
 
+	private Fly fly = null;
+	
 	/**
 	 * 初始化
 	 */
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
-		this.fly = Fly.me();
 		String className = config.getInitParameter("bootstrap");
-		BootStrap bootstrap = this.getBootStrap(className);
-		bootstrap.init(fly);
-		
+		BootStrap bootStrap = this.getBootStrap(className);
+		fly = Fly.me();
+		bootStrap.config(fly.getFlyConfig());
+		bootStrap.start(fly);
 		logger.info("FlyMvc init success!");
 	}
 
@@ -59,8 +57,8 @@ public class FlyMvcServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding(fly.getFlyConfig().getCharset().getValue());
+		response.setCharacterEncoding(fly.getFlyConfig().getCharset().getValue());
 		
 		String uri = request.getRequestURI();
 
@@ -116,13 +114,5 @@ public class FlyMvcServlet extends HttpServlet {
 			}
 		}
 		throw new RuntimeException("init BootStrap class error!");
-	}
-
-	public Fly getFly() {
-		return fly;
-	}
-
-	public void setFly(Fly fly) {
-		this.fly = fly;
 	}
 }

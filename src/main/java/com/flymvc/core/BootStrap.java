@@ -1,7 +1,25 @@
 package com.flymvc.core;
 
-public interface BootStrap {
+import com.flymvc.config.Fly;
+import com.flymvc.config.FlyConfig;
 
-	void init(Fly fly);
+/**
+ * 启动类
+ * @author jameszhou
+ *
+ */
+public abstract class BootStrap {
+
+	/**
+	 * 默认配置
+	 * @param config
+	 */
+	public void config(FlyConfig config) {}
+
+	/**
+	 * 路由配置
+	 * @param fly
+	 */
+	public abstract void start(Fly fly);
 	
 }
