@@ -74,7 +74,7 @@ public class FlyMvcServlet extends HttpServlet {
 				render.render(request, response, result.toString());
 			}
 		}else{
-			response.sendError(404, "NotFind");
+			response.sendError(404, "NotFound");
 		}
 	}
 
