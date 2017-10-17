@@ -3,7 +3,7 @@ package com.flymvc.route;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RouteMap {
+public class RouteMatcher {
 	
 	private static Set<Route> routes = new HashSet<Route>(); 
 	

@@ -15,12 +15,12 @@ import com.flymvc.bean.Param;
 public class RequestUtil {
 
 	public static void checkInject(HttpServletRequest request, HttpServletResponse response, List<Param> params,
-			Object[] objects) {
+			Object[] args) {
 		for (int i = 0; i < params.size(); i++) {
 			if (params.get(i).getClazz() == HttpServletRequest.class) {
-				objects[i] = request;
+				args[i] = request;
 			} else if(params.get(i).getClazz() == HttpServletResponse.class){
-				objects[i] = response;
+				args[i] = response;
 			}
 		}
 

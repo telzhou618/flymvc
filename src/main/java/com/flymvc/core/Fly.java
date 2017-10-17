@@ -6,7 +6,7 @@ import com.flymvc.config.FlyConfig;
 import com.flymvc.render.JspRender;
 import com.flymvc.render.Render;
 import com.flymvc.route.Route;
-import com.flymvc.route.RouteMap;
+import com.flymvc.route.RouteMatcher;
 import com.flymvc.util.MethodUtil;
 
 public class Fly {
@@ -20,7 +20,7 @@ public class Fly {
 	/**
 	 * 路由
 	 */
-	private RouteMap routeMap;
+	private RouteMatcher routeMatcher;
 	
 	private Render render;
 	
@@ -32,14 +32,14 @@ public class Fly {
 		this.flyConfig = flyConfig;
 	}
 
-	public RouteMap getRouteMap() {
-		return routeMap;
+	public RouteMatcher getRouteMatcher() {
+		return routeMatcher;
 	}
 
-	public void setRouteMap(RouteMap routeMap) {
-		this.routeMap = routeMap;
+	public void setRouteMatcher(RouteMatcher routeMatcher) {
+		this.routeMatcher = routeMatcher;
 	}
-	
+
 	public Render getRender() {
 		return render;
 	}
@@ -53,7 +53,7 @@ public class Fly {
 	 */
 	private Fly() {
 		this.flyConfig = new FlyConfig();
-		this.routeMap = new RouteMap();
+		this.routeMatcher = new RouteMatcher();
 		this.render = new JspRender();
 	}
 	
@@ -71,10 +71,10 @@ public class Fly {
 	public void addRoute(String uri,Object controller,String methodName){
 		try {
 			Method method = MethodUtil.getMethod(controller.getClass(), methodName);
-			if(routeMap.getRoute(uri)!=null){
+			if(routeMatcher.getRoute(uri)!=null){
 				throw new RuntimeException(controller.getClass().getSimpleName()+"."+method.getName()+"() ethod too more.");
 			}
-			this.routeMap.addRoute(new Route(uri, controller, method));
+			this.routeMatcher.addRoute(new Route(uri, controller, method));
 		} catch (NoSuchMethodException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
