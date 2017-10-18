@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import com.flymvc.bean.Param;
+import com.flymvc.core.Req;
 
 /**
  * 注入Request,Response对象工具类
@@ -25,6 +26,8 @@ public class RequestUtil {
 				args[i] = request;
 			} else if(params.get(i).getClazz() == HttpServletResponse.class){
 				args[i] = response;
+			}else if(params.get(i).getClazz() == Req.class){
+				args[i] = new Req(request, response);
 			}
 		}
 
