@@ -6,6 +6,11 @@ import java.util.Set;
 
 import com.flymvc.util.MethodUtil;
 
+/**
+ * 路由集合
+ * @author jameszhou
+ *
+ */
 public class Routes {
 
 	private Set<Route> routes;

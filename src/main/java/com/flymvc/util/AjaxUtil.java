@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * ajax工具类
+ * @author jameszhou
+ *
+ */
 public class AjaxUtil {
 
 

@@ -1,5 +1,10 @@
 package com.flymvc.bean;
 
+/**
+ * 参数
+ * @author jameszhou
+ *
+ */
 public class Param {
 
 	/**

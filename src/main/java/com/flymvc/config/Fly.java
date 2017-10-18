@@ -6,7 +6,11 @@ import com.flymvc.render.FreeMarkerRender;
 import com.flymvc.render.Render;
 import com.flymvc.route.Routes;
 import com.flymvc.util.PluginUtil;
-
+/**
+ * 配置
+ * @author jameszhou
+ *
+ */
 public class Fly {
 	
 	/**
