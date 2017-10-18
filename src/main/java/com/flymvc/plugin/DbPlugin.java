@@ -18,7 +18,7 @@ public class DbPlugin implements Plugin{
 	public boolean start() {
 		// TODO Auto-generated method stub
 		//实现数据库链接
-		logger.debug("DbPlugin init success!");
+		logger.info("DbPlugin init success!");
 		return true;
 	}
 

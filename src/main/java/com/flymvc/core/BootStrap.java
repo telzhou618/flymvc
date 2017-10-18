@@ -1,6 +1,5 @@
 package com.flymvc.core;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.flymvc.config.FlyConfig;
@@ -20,16 +19,13 @@ public abstract class BootStrap {
 	 * 默认配置
 	 * @param config
 	 */
-	public FlyConfig config() {
-		
-		return new FlyConfig();
-	}
+	public void config(FlyConfig config) {}
 
 	/**
 	 * 路由配置
 	 * @param fly
 	 */
-	public abstract RouteMatcher routeMatcher();
+	public abstract void route(RouteMatcher routeMatcher);
 	
 	/**
 	 * 渲染器
@@ -44,8 +40,6 @@ public abstract class BootStrap {
 	 * 加载插件
 	 * @return
 	 */
-	public List<Plugin> plugins(){
-		return new ArrayList<Plugin>();
-	}
+	public void plugin(List<Plugin> plugins){}
 	
 }
