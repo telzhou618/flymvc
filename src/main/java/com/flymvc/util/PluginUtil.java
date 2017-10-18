@@ -1,15 +1,14 @@
 package com.flymvc.util;
 
-import java.util.List;
-
 import com.flymvc.exception.PluginException;
 import com.flymvc.plugin.Plugin;
+import com.flymvc.plugin.Plugins;
 
 public class PluginUtil {
 
-	public static void initPlugins(List<Plugin> plugins) {
+	public static void initPlugins(Plugins plugins) {
 		// TODO Auto-generated method stub
-		for(Plugin plugin : plugins){
+		for(Plugin plugin : plugins.getPlugins()){
 			initPlugin(plugin);
 		}
 	}
@@ -34,9 +33,9 @@ public class PluginUtil {
 		}
 	}
 	
-	public static void stopPlugins(List<Plugin> plugins) {
+	public static void stopPlugins(Plugins plugins) {
 		// TODO Auto-generated method stub
-		for(Plugin plugin : plugins){
+		for(Plugin plugin : plugins.getPlugins()){
 			stopPlugin(plugin);
 		}
 	}

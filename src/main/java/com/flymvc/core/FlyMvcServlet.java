@@ -19,7 +19,6 @@ import com.flymvc.render.Render;
 import com.flymvc.route.Route;
 import com.flymvc.util.AjaxUtil;
 import com.flymvc.util.ParameterUtil;
-import com.flymvc.util.PluginUtil;
 import com.flymvc.util.RefactUtil;
 import com.flymvc.util.RequestUtil;
 
@@ -45,10 +44,14 @@ public class FlyMvcServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String className = config.getInitParameter("bootstrap");
 		BootStrap bootStrap = this.getBootStrap(className);
-		fly = Fly.init(bootStrap);
-		//批量初始化插件
-		PluginUtil.initPlugins(fly.getPlugins());
-		logger.info("FlyMvc init success!");
+		try {
+			Fly.init(bootStrap);
+			fly = Fly.me();
+			logger.info("FlyMvc init success!");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -58,15 +61,15 @@ public class FlyMvcServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		request.setCharacterEncoding(fly.getFlyConfig().getCharset().getValue());
-		response.setCharacterEncoding(fly.getFlyConfig().getCharset().getValue());
+		request.setCharacterEncoding(fly.getConfig().getCharset().getValue());
+		response.setCharacterEncoding(fly.getConfig().getCharset().getValue());
 		
 		String uri = request.getRequestURI();
 
 		logger.debug("Uri : " + uri);
 		logger.debug("Parameters : " + request.getParameterMap());
 		
-		Route route = fly.getRouteMatcher().getRoute(uri);
+		Route route = fly.getRoutes().getRoute(uri);
 		if(route != null){
 			doFlyService(request, response, route);
 		} else{

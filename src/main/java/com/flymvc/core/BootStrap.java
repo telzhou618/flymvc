@@ -1,12 +1,10 @@
 package com.flymvc.core;
 
-import java.util.List;
-
-import com.flymvc.config.FlyConfig;
-import com.flymvc.plugin.Plugin;
+import com.flymvc.config.Config;
+import com.flymvc.plugin.Plugins;
 import com.flymvc.render.JspRender;
 import com.flymvc.render.Render;
-import com.flymvc.route.RouteMatcher;
+import com.flymvc.route.Routes;
 
 /**
  * 启动类
@@ -19,13 +17,13 @@ public abstract class BootStrap {
 	 * 默认配置
 	 * @param config
 	 */
-	public void config(FlyConfig config) {}
+	public void config(Config config) {}
 
 	/**
 	 * 路由配置
 	 * @param fly
 	 */
-	public abstract void route(RouteMatcher routeMatcher);
+	public abstract void route(Routes routeMatcher);
 	
 	/**
 	 * 渲染器
@@ -39,6 +37,6 @@ public abstract class BootStrap {
 	 * 加载插件
 	 * @return
 	 */
-	public void plugin(List<Plugin> plugins){}
+	public void plugin(Plugins plugins){}
 	
 }

@@ -1,25 +1,23 @@
 package com.flymvc.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.flymvc.core.BootStrap;
-import com.flymvc.plugin.Plugin;
+import com.flymvc.plugin.Plugins;
 import com.flymvc.render.JspRender;
 import com.flymvc.render.Render;
-import com.flymvc.route.RouteMatcher;
+import com.flymvc.route.Routes;
+import com.flymvc.util.PluginUtil;
 
 public class Fly {
 	
 	/**
 	 * 默认配置
 	 */
-	private FlyConfig flyConfig;
+	private Config config;
 	
 	/**
 	 * 路由
 	 */
-	private RouteMatcher routeMatcher;
+	private Routes routes;
 	/**
 	 * 渲染器
 	 */
@@ -28,26 +26,25 @@ public class Fly {
 	/**
 	 * 插件
 	 */
-	private List<Plugin> plugins;
+	private Plugins plugins;
 	
 	
 	private static Fly  fly = null;
-	
-	
-	public FlyConfig getFlyConfig() {
-		return flyConfig;
+
+	public Config getConfig() {
+		return config;
 	}
 
-	public void setFlyConfig(FlyConfig flyConfig) {
-		this.flyConfig = flyConfig;
+	public void setConfig(Config config) {
+		this.config = config;
 	}
 
-	public RouteMatcher getRouteMatcher() {
-		return routeMatcher;
+	public Routes getRoutes() {
+		return routes;
 	}
 
-	public void setRouteMatcher(RouteMatcher routeMatcher) {
-		this.routeMatcher = routeMatcher;
+	public void setRoutes(Routes routes) {
+		this.routes = routes;
 	}
 
 	public Render getRender() {
@@ -58,11 +55,11 @@ public class Fly {
 		this.render = render;
 	}
 	
-	public List<Plugin> getPlugins() {
+	public Plugins getPlugins() {
 		return plugins;
 	}
 
-	public void setPlugins(List<Plugin> plugins) {
+	public void setPlugins(Plugins plugins) {
 		this.plugins = plugins;
 	}
 
@@ -70,10 +67,10 @@ public class Fly {
 	 * 私有化构造
 	 */
 	private Fly() {
-		this.flyConfig = new FlyConfig();
-		this.routeMatcher = new RouteMatcher();
+		this.config = new Config();
+		this.routes = new Routes();
 		this.render = new JspRender();
-		this.plugins = new ArrayList<Plugin>();
+		this.plugins = new Plugins();
 	}
 	
 	/**
@@ -81,15 +78,15 @@ public class Fly {
 	 * @param bootStrap 
 	 * @return
 	 */
-	public static Fly init(BootStrap bootStrap){
+	public static void init(BootStrap bootStrap) throws Exception{
 		if(fly== null){
 			fly = new Fly();
-			bootStrap.config(fly.getFlyConfig());
+			bootStrap.config(fly.getConfig());
 			bootStrap.plugin(fly.getPlugins());
-			bootStrap.route(fly.getRouteMatcher());
+			bootStrap.route(fly.getRoutes());
 			fly.setRender(bootStrap.render());
+			PluginUtil.initPlugins(fly.getPlugins());
 		}
-		return fly;
 	}
 	public static Fly me(){
 		if(fly==null){

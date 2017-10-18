@@ -7,7 +7,7 @@ import com.flymvc.enums.Charset;
  * @author jameszhou
  *
  */
-public class FlyConfig {
+public class Config {
 	
 	/**
 	 * 模板地址
