@@ -10,7 +10,7 @@ import com.flymvc.util.PluginUtil;
 public class Fly {
 	
 	/**
-	 * 默认配置
+	 * 配置
 	 */
 	private Config config;
 	
