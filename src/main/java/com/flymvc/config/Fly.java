@@ -1,12 +1,11 @@
 package com.flymvc.config;
 
-import java.lang.reflect.Method;
+import java.util.List;
 
-import com.flymvc.render.JspRender;
+import com.flymvc.core.BootStrap;
+import com.flymvc.plugin.Plugin;
 import com.flymvc.render.Render;
-import com.flymvc.route.Route;
 import com.flymvc.route.RouteMatcher;
-import com.flymvc.util.MethodUtil;
 
 public class Fly {
 	
@@ -23,6 +22,11 @@ public class Fly {
 	 * 渲染器
 	 */
 	private Render render;
+	
+	/**
+	 * 插件
+	 */
+	private List<Plugin> plugins;
 	
 	
 	private static Fly  fly = null;
@@ -51,44 +55,39 @@ public class Fly {
 	public void setRender(Render render) {
 		this.render = render;
 	}
+	
+	public List<Plugin> getPlugins() {
+		return plugins;
+	}
+
+	public void setPlugins(List<Plugin> plugins) {
+		this.plugins = plugins;
+	}
 
 	/**
 	 * 私有化构造
 	 */
-	private Fly() {
-		this.routeMatcher = new RouteMatcher();
-		this.render = new JspRender();
-		this.flyConfig = new FlyConfig();
-	}
+	private Fly() {}
 	
 	/**
 	 * 获取单例对象
+	 * @param bootStrap 
 	 * @return
 	 */
-	public static Fly me(){
+	public static Fly init(BootStrap bootStrap){
 		if(fly== null){
 			fly = new Fly();
+			fly.setFlyConfig( bootStrap.config());
+			fly.setRender(bootStrap.render());
+			fly.setRouteMatcher(bootStrap.routeMatcher());
+			fly.setPlugins(bootStrap.plugins());
 		}
 		return fly;
 	}
-	
-	public void addRoute(String uri,Object controller,String methodName){
-		try {
-			Method method = MethodUtil.getMethod(controller.getClass(), methodName);
-			if(routeMatcher.getRoute(uri)!=null){
-				throw new RuntimeException(controller.getClass().getSimpleName()+"."+method.getName()+"() ethod too more.");
-			}
-			this.routeMatcher.addRoute(new Route(uri, controller, method));
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static Fly me(){
+		if(fly==null){
+			throw new RuntimeException("fly is null");
 		}
-	}
-	
-	public void addRoute(String uri,Object controller){
-		Method[] methods = controller.getClass().getDeclaredMethods();
-		for(Method method : methods){
-			this.addRoute(uri + "/" +method.getName(), controller, method.getName());
-		}
+		return fly;
 	}
 }

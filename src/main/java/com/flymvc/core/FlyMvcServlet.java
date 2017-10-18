@@ -19,6 +19,7 @@ import com.flymvc.render.Render;
 import com.flymvc.route.Route;
 import com.flymvc.util.AjaxUtil;
 import com.flymvc.util.ParameterUtil;
+import com.flymvc.util.PluginUtil;
 import com.flymvc.util.RefactUtil;
 import com.flymvc.util.RequestUtil;
 
@@ -44,9 +45,8 @@ public class FlyMvcServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String className = config.getInitParameter("bootstrap");
 		BootStrap bootStrap = this.getBootStrap(className);
-		fly = Fly.me();
-		bootStrap.config(fly.getFlyConfig());
-		bootStrap.start(fly);
+		fly = Fly.init(bootStrap);
+		PluginUtil.initPlugins(fly.getPlugins());
 		logger.info("FlyMvc init success!");
 	}
 
