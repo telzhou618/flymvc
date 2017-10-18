@@ -2,7 +2,7 @@ package com.flymvc.config;
 
 import com.flymvc.core.BootStrap;
 import com.flymvc.plugin.Plugins;
-import com.flymvc.render.JspRender;
+import com.flymvc.render.FreeMarkerRender;
 import com.flymvc.render.Render;
 import com.flymvc.route.Routes;
 import com.flymvc.util.PluginUtil;
@@ -69,7 +69,7 @@ public class Fly {
 	private Fly() {
 		this.config = new Config();
 		this.routes = new Routes();
-		this.render = new JspRender();
+		this.render = new FreeMarkerRender();
 		this.plugins = new Plugins();
 	}
 	

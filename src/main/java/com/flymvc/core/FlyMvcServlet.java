@@ -60,15 +60,13 @@ public class FlyMvcServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		//设置变编码
 		request.setCharacterEncoding(fly.getConfig().getCharset().getValue());
 		response.setCharacterEncoding(fly.getConfig().getCharset().getValue());
 		
-		String uri = request.getRequestURI();
-
-		logger.debug("Uri : " + uri);
-		logger.debug("Parameters : " + request.getParameterMap());
+		logger.debug(RequestUtil.logParamers(request));
 		
+		String uri = request.getRequestURI();
 		Route route = fly.getRoutes().getRoute(uri);
 		if(route != null){
 			doFlyService(request, response, route);

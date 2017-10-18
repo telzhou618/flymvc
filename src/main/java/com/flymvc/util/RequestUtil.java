@@ -1,9 +1,13 @@
 package com.flymvc.util;
 
+import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 import com.flymvc.bean.Param;
 
@@ -24,6 +28,23 @@ public class RequestUtil {
 			}
 		}
 
+	}
+
+	public static Object logParamers(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+		StringBuffer sb = new StringBuffer("[");
+		Enumeration<String> enumeration =  request.getParameterNames();
+		while(enumeration.hasMoreElements()){
+			String name = enumeration.nextElement();
+			sb.append(name).append("=").append(request.getParameter(name)).append(",");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		sb.append("]");
+		return "\nUri："+request.getRequestURI()
+			+"\nParameters：" + sb.toString()
+			+"\nDatetime：" +  DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:sss")
+		+"\n---------------------------------------";
 	}
 
 }

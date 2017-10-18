@@ -4,21 +4,22 @@ import com.flymvc.enums.Charset;
 
 /**
  * 配置文件
+ * 
  * @author jameszhou
  *
  */
 public class Config {
-	
+
 	/**
 	 * 模板地址
 	 */
 	private String viewPath = "/WEB-INF/views";
+
 	/**
 	 * 默认编码
 	 */
 	private Charset charset = Charset.UTF_8;
-	
-	
+
 	public String getViewPath() {
 		return viewPath;
 	}

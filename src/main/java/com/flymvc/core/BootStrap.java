@@ -2,7 +2,7 @@ package com.flymvc.core;
 
 import com.flymvc.config.Config;
 import com.flymvc.plugin.Plugins;
-import com.flymvc.render.JspRender;
+import com.flymvc.render.FreeMarkerRender;
 import com.flymvc.render.Render;
 import com.flymvc.route.Routes;
 
@@ -30,7 +30,7 @@ public abstract class BootStrap {
 	 * @param render
 	 */
 	public Render render() {
-		return new JspRender();
+		return new FreeMarkerRender();
 	}
 	
 	/**
