@@ -46,6 +46,7 @@ public class FlyMvcServlet extends HttpServlet {
 		String className = config.getInitParameter("bootstrap");
 		BootStrap bootStrap = this.getBootStrap(className);
 		fly = Fly.init(bootStrap);
+		//批量初始化插件
 		PluginUtil.initPlugins(fly.getPlugins());
 		logger.info("FlyMvc init success!");
 	}

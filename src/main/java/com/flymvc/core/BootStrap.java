@@ -32,7 +32,6 @@ public abstract class BootStrap {
 	 * @param render
 	 */
 	public Render render() {
-		
 		return new JspRender();
 	}
 	
