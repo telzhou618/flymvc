@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.flymvc.config.Fly;
+import com.flymvc.Fly;
 
 /**
  * Jsp 渲染实现

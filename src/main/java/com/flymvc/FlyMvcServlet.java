@@ -1,4 +1,4 @@
-package com.flymvc.core;
+package com.flymvc;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -12,9 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.flymvc.anno.ResponsJson;
+import com.flymvc.anno.RespJson;
 import com.flymvc.bean.Param;
-import com.flymvc.config.Fly;
 import com.flymvc.render.Render;
 import com.flymvc.route.Route;
 import com.flymvc.util.AjaxUtil;
@@ -89,8 +88,8 @@ public class FlyMvcServlet extends HttpServlet {
 		//执行invoke
 		Object result = RefactUtil.invoke(method,controller,args);
 		//处理执行结果
-		ResponsJson responseJson = method.getAnnotation(ResponsJson.class);
-		if (responseJson != null) {
+		RespJson respJson = method.getAnnotation(RespJson.class);
+		if (respJson != null) {
 			AjaxUtil.render(request, response,result);
 		} else {
 			render.render(request, response, result.toString());

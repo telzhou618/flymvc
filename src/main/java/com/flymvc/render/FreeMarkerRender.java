@@ -9,8 +9,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.flymvc.Fly;
 import com.flymvc.config.Config;
-import com.flymvc.config.Fly;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -24,6 +24,8 @@ import freemarker.template.TemplateException;
  */
 public class FreeMarkerRender implements Render {
 
+	private static Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
+	
 	@Override
 	public void render(HttpServletRequest request, HttpServletResponse response, String view) {
 
@@ -54,7 +56,6 @@ public class FreeMarkerRender implements Render {
 	public static Configuration getConfiguration(Object servletContext) {
 
 		Config config = Fly.me().getConfig();
-		Configuration configuration = new Configuration(Configuration.VERSION_2_3_26);
 		configuration.setServletContextForTemplateLoading(servletContext, config.getViewPath());
 		configuration.setDefaultEncoding(config.getCharset().getValue());
 		configuration.setOutputEncoding(config.getCharset().getValue());

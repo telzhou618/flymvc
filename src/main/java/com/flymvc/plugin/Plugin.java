@@ -1,6 +1,6 @@
 package com.flymvc.plugin;
 
-import com.flymvc.exception.PluginException;
+import com.flymvc.exception.FlyException;
 
 /**
  * 插件接口
@@ -13,13 +13,13 @@ public interface Plugin {
 	 * 启动插件
 	 * @return
 	 */
-	public boolean start() throws PluginException;
+	public boolean start() throws FlyException;
 	
 	/**
 	 * 停止插件
 	 * @return
 	 */
-	public boolean stop() throws PluginException;
+	public boolean stop() throws FlyException;
 	
 	
 }

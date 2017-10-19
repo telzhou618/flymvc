@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
+import com.flymvc.Req;
 import com.flymvc.bean.Param;
-import com.flymvc.core.Req;
 
 /**
  * 注入Request,Response对象工具类

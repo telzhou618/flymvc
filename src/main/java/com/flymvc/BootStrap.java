@@ -1,4 +1,4 @@
-package com.flymvc.core;
+package com.flymvc;
 
 import com.flymvc.config.Config;
 import com.flymvc.plugin.Plugins;

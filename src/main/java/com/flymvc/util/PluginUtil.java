@@ -1,6 +1,6 @@
 package com.flymvc.util;
 
-import com.flymvc.exception.PluginException;
+import com.flymvc.exception.FlyException;
 import com.flymvc.plugin.Plugin;
 import com.flymvc.plugin.Plugins;
 
@@ -17,7 +17,7 @@ public class PluginUtil {
 		// TODO Auto-generated method stub
 		try {
 			plugin.start();
-		} catch (PluginException e) {
+		} catch (FlyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -27,7 +27,7 @@ public class PluginUtil {
 		// TODO Auto-generated method stub
 		try {
 			plugin.stop();
-		} catch (PluginException e) {
+		} catch (FlyException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

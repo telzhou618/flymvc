@@ -1,6 +1,6 @@
-package com.flymvc.config;
+package com.flymvc;
 
-import com.flymvc.core.BootStrap;
+import com.flymvc.config.Config;
 import com.flymvc.plugin.Plugins;
 import com.flymvc.render.FreeMarkerRender;
 import com.flymvc.render.Render;
