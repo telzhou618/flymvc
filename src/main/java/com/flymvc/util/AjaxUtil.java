@@ -16,12 +16,12 @@ import com.google.gson.GsonBuilder;
  */
 public class AjaxUtil {
 
-
+	private static GsonBuilder builder = new GsonBuilder();
+	
 	public static void render(HttpServletRequest request, HttpServletResponse response, Object result) {
 		// TODO Auto-generated method stub
 		try {
 			PrintWriter writer = response.getWriter();
-			GsonBuilder builder = new GsonBuilder();
 			Gson gson = builder.create();
 			writer.write(gson.toJson(result));
 		} catch (IOException e) {

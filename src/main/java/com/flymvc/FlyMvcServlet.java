@@ -91,7 +91,7 @@ public class FlyMvcServlet extends HttpServlet {
 		RespJson respJson = method.getAnnotation(RespJson.class);
 		if (respJson != null) {
 			AjaxUtil.render(request, response,result);
-		} else {
+		} else if(result!=null){
 			render.render(request, response, result.toString());
 		}
 	}

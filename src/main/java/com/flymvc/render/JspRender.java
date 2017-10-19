@@ -19,7 +19,7 @@ public class JspRender implements Render {
 	@Override
 	public void render(HttpServletRequest request, HttpServletResponse response, String view) {
 		try {
-			
+			 response.setContentType("text/html;charSet=utf-8"); 
 			String viePath = Fly.me().getConfig().getViewPath() + "/"+view + ".jsp";
 			request.getRequestDispatcher(viePath).forward(request, response);
 		} catch (ServletException | IOException e) {

@@ -28,7 +28,7 @@ public class FreeMarkerRender implements Render {
 	
 	@Override
 	public void render(HttpServletRequest request, HttpServletResponse response, String view) {
-
+		 response.setContentType("text/html;charSet=utf-8"); 
 		Configuration configuration = getConfiguration(request.getSession().getServletContext());
 		try {
 			Template template = configuration.getTemplate(view + ".html");
@@ -41,6 +41,7 @@ public class FreeMarkerRender implements Render {
 			}
 			template.process(map, out);
 			out.flush();
+			out.close();
 		} catch (IOException | TemplateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
