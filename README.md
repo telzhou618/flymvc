@@ -109,6 +109,12 @@
 	 }
     } 
 	
+	#UserController控制器对应的http请求
+	http://localhost:8080/user/test?name=zhangsan&age=10
+	http://localhost:8080/user/test2?name=zhangsan&age=10
+	http://localhost:8080/user/test3?name=zhangsan&age=10
+	http://localhost:8080/user/json
+	http://localhost:8080/user/javascript
  
 ```
 4. demo <br>
