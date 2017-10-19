@@ -36,7 +36,11 @@ public class Routes {
 	public void addRoute(String uri, Object controller) {
 		Method[] methods = controller.getClass().getDeclaredMethods();
 		for (Method method : methods) {
-			this.addRoute(uri + "/" + method.getName(), controller, method.getName());
+			if(uri.equals("/")){
+				this.addRoute(uri  + method.getName(), controller, method.getName());
+			}else{
+				this.addRoute(uri + "/" + method.getName(), controller, method.getName());
+			}
 		}
 	}
 

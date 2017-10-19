@@ -45,7 +45,7 @@ public class Req {
 		return request.getParameterValues(name);
 	}
 	
-	public void  setAttr(String name,Object object) {
+	public void  addAttr(String name,Object object) {
 		request.setAttribute(name, object);
 	}
 	
