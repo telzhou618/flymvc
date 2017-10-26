@@ -24,6 +24,18 @@
 	 */
 	@Override
 	public void plugin(Plugins plugins) {}
+	
+	/**
+	 * 全局拦截,执行顺序遵循spring的规则，先进后出
+	 */
+	@Override
+	public void interceptor(Interceptors interceptors) {
+		
+		interceptors.add(new LoginInterceptor());
+		interceptors.add(new PayInterceptor());
+		
+	}
+	
     }
 ```
 2. web.xml
@@ -118,7 +130,52 @@
 	http://localhost:8080/user/json
 	http://localhost:8080/user/javascript
 ```
-4. demo <br>
+
+4. 拦截器
+```Java
+	
+	/**
+	* 实现全局拦截器和以继承AbstractInterceptor或实现Interceptor接口来完成
+	*
+	**/
+	public class LoginInterceptor extends AbstractInterceptor{
+
+	/**
+	* 方法执行前执行
+	**/
+	@Override
+	public boolean before(HttpServletRequest request, HttpServletResponse response, Object object)
+			throws InterceptorException {
+		
+		System.out.println("Login interceptor before");
+		
+		if(object instanceof ModelRender){
+			
+			ModelRender modelRender = (ModelRender) object;
+			
+			System.out.println("Controller:"+modelRender.getController());
+			System.out.println("Method:"+modelRender.getMethod());
+			System.out.println("Render:"+modelRender.getRender());
+			
+		}
+		
+		return true;
+	}
+
+	/**
+	* 方法执行后执行
+	**/
+	@Override
+	public boolean after(HttpServletRequest request, HttpServletResponse response, Object object)
+			throws InterceptorException {
+		
+		System.out.println("Login interceptor after");
+		return true;
+	}	
+    }
+```
+
+5. demo <br>
 	https://github.com/zhougaojun618/flymvc-demo
-4. 申明  <br>
+6. 申明  <br>
 	本项目纯属个人兴趣学习需要，如有不妥，请大神高抬贵手。
