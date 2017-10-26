@@ -1,6 +1,7 @@
 package com.flymvc;
 
 import com.flymvc.config.Config;
+import com.flymvc.interceptor.Interceptors;
 import com.flymvc.plugin.Plugins;
 import com.flymvc.render.FreeMarkerRender;
 import com.flymvc.render.Render;
@@ -32,6 +33,10 @@ public class Fly {
 	 */
 	private Plugins plugins;
 	
+	/**
+	 * 拦截器集合
+	 */
+	private Interceptors interceptors;
 	
 	private static Fly  fly = null;
 
@@ -66,6 +71,14 @@ public class Fly {
 	public void setPlugins(Plugins plugins) {
 		this.plugins = plugins;
 	}
+	
+	public Interceptors getInterceptors() {
+		return interceptors;
+	}
+
+	public void setInterceptors(Interceptors interceptors) {
+		this.interceptors = interceptors;
+	}
 
 	/**
 	 * 私有化构造
@@ -75,6 +88,7 @@ public class Fly {
 		this.routes = new Routes();
 		this.render = new FreeMarkerRender();
 		this.plugins = new Plugins();
+		this.interceptors = new Interceptors();
 	}
 	
 	/**
@@ -90,6 +104,7 @@ public class Fly {
 			bootStrap.route(fly.getRoutes());
 			fly.setRender(bootStrap.render());
 			PluginUtil.initPlugins(fly.getPlugins());
+			bootStrap.interceptor(fly.getInterceptors());
 		}
 	}
 	public static Fly me(){

@@ -1,6 +1,7 @@
 package com.flymvc;
 
 import com.flymvc.config.Config;
+import com.flymvc.interceptor.Interceptors;
 import com.flymvc.plugin.Plugins;
 import com.flymvc.render.FreeMarkerRender;
 import com.flymvc.render.Render;
@@ -38,5 +39,11 @@ public abstract class BootStrap {
 	 * @return
 	 */
 	public void plugin(Plugins plugins){}
+	
+	/**
+	 * 加载全局拦截器
+	 * @return
+	 */
+	public void interceptor(Interceptors interceptors){}
 	
 }
