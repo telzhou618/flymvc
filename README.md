@@ -135,7 +135,7 @@
 ```Java
 	
 	/**
-	* 实现全局拦截器和以继承AbstractInterceptor或实现Interceptor接口来完成
+	* 实现全局拦截器可以通过继承AbstractInterceptor抽象类或实现Interceptor接口来完成
 	*
 	**/
 	public class LoginInterceptor extends AbstractInterceptor{
