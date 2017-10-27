@@ -1,4 +1,4 @@
-package com.flymvc.interceptor;
+package com.flymvc.bean;
 
 import java.lang.reflect.Method;
 

@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.flymvc.anno.RespJson;
+import com.flymvc.annotation.RespJson;
+import com.flymvc.bean.ModelRender;
 import com.flymvc.bean.Param;
 import com.flymvc.interceptor.Interceptors;
-import com.flymvc.interceptor.ModelRender;
 import com.flymvc.render.Render;
 import com.flymvc.route.Route;
 import com.flymvc.util.AjaxUtil;

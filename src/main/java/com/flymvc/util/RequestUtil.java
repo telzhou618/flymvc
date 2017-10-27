@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 
-import com.flymvc.Req;
 import com.flymvc.bean.Param;
+import com.flymvc.bean.Req;
 
 /**
  * 注入Request,Response对象工具类
@@ -19,6 +19,13 @@ import com.flymvc.bean.Param;
  */
 public class RequestUtil {
 
+	/**
+	 * 检查是否存在request response req对象，如果存在，则注入
+	 * @param request
+	 * @param response
+	 * @param params
+	 * @param args
+	 */
 	public static void checkInject(HttpServletRequest request, HttpServletResponse response, List<Param> params,
 			Object[] args) {
 		for (int i = 0; i < params.size(); i++) {
@@ -33,6 +40,11 @@ public class RequestUtil {
 
 	}
 
+	/**
+	 * 获取打印日志
+	 * @param request
+	 * @return
+	 */
 	public static Object logParamers(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		

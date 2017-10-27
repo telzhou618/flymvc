@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.flymvc.bean.ModelRender;
 import com.flymvc.exception.InterceptorException;
 import com.flymvc.interceptor.Interceptor;
 import com.flymvc.interceptor.Interceptors;
-import com.flymvc.interceptor.ModelRender;
 
 /**
  * 拦截器执行工具类
@@ -18,6 +18,14 @@ import com.flymvc.interceptor.ModelRender;
  */
 public class InterceptorUtil {
 
+	/**
+	 * 执行拦截器before方法
+	 * @param request
+	 * @param response
+	 * @param interceptors
+	 * @param modelRender
+	 * @return
+	 */
 	public static boolean executeBefore(HttpServletRequest request, HttpServletResponse response,
 			Interceptors interceptors, ModelRender modelRender) {
 
@@ -36,6 +44,14 @@ public class InterceptorUtil {
 		return true;
 	}
 
+	/**
+	 * 执行拦截器after方法
+	 * @param request
+	 * @param response
+	 * @param interceptors
+	 * @param modelRender
+	 * @return
+	 */
 	public static boolean executeAfter(HttpServletRequest request, HttpServletResponse response,
 			Interceptors interceptors, ModelRender modelRender) {
 
