@@ -18,6 +18,7 @@ import javassist.bytecode.MethodInfo;
 
 /**
  * 参数解析工具类
+ * 
  * @author jameszhou
  *
  */
@@ -86,14 +87,100 @@ public class ParameterUtil {
 		Object object = null;
 		String clssName = param.getClazz().getSimpleName();
 		if (!param.getClazz().isArray()) { // 忽略数组类型
-			if (clssName.equalsIgnoreCase("Integer") || clssName.equalsIgnoreCase("int")) {
-				object = Integer.parseInt((values != null) ? values[0] : "0");
-			} else if (clssName.equalsIgnoreCase("Float") || clssName.equalsIgnoreCase("float")) {
-				object = Float.parseFloat((values != null) ? values[0] : "0");
-			} else if (clssName.equalsIgnoreCase("Double") || clssName.equalsIgnoreCase("double")) {
-				object = Double.parseDouble((values != null) ? values[0] : "0");
-			} else if (clssName.equalsIgnoreCase("String")) {
-				object = (values != null) ? values[0] : null;
+
+			switch (clssName) {
+
+			case "Integer":
+				if (values != null && values.length > 0) {
+					try {
+						object = Integer.parseInt(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be Integer type");
+					}
+				}
+				break;
+			case "Float":
+				if (values != null && values.length > 0) {
+					try {
+						object = Float.parseFloat(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be Float type");
+					}
+				}
+				break;
+			case "Double":
+				if (values != null && values.length > 0) {
+					try {
+						object = Double.parseDouble(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be Double type");
+					}
+				}
+				break;
+			case "int":
+				if (values != null && values.length > 0) {
+					try {
+						object = Integer.parseInt(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be int type");
+					}
+				} else {
+					throw new NumberFormatException(param.getName() + " must be int type");
+				}
+				break;
+			case "float":
+				if (values != null && values.length > 0) {
+					try {
+						object = Float.parseFloat(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be float type");
+					}
+				} else {
+					throw new NumberFormatException(param.getName() + " must be float type");
+				}
+				break;
+			case "double":
+				if (values != null && values.length > 0) {
+					try {
+						object = Double.parseDouble(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be double type");
+					}
+				} else {
+					throw new NumberFormatException(param.getName() + " must be double type");
+				}
+				break;
+			case "Boolean":
+				if (values != null && values.length > 0) {
+					try {
+						object = Boolean.parseBoolean(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be Boolean type");
+					}
+				}
+				break;
+			case "boolean":
+				if (values != null && values.length > 0) {
+					try {
+						object = Boolean.parseBoolean(values[0]);
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						throw new NumberFormatException(param.getName() + " must be boolean type");
+					}
+				} else {
+					throw new NumberFormatException(param.getName() + " must be boolean type");
+				}
+				break;
+			default:
+				object = (values != null && values.length > 0) ? values[0] : null;
+				break;
 			}
 		}
 		return object;

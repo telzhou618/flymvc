@@ -19,6 +19,28 @@ public class Routes {
 		this.routes.add(route);
 	}
 
+	
+	public void addRoute(String uri, Class<?> clazz, String methodName) {
+		try {
+			Object controller = clazz.newInstance();
+			Method method = MethodUtil.getMethod(controller.getClass(), methodName);
+			if (this.getRoute(uri) != null) {
+				throw new RuntimeException(
+						controller.getClass().getSimpleName() + "." + method.getName() + "() ethod too more.");
+			}
+			this.addRoute(new Route(uri, controller, method));
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void addRoute(String uri, Object controller, String methodName) {
 		try {
 			Method method = MethodUtil.getMethod(controller.getClass(), methodName);
@@ -33,17 +55,23 @@ public class Routes {
 		}
 	}
 
-	public void addRoute(String uri, Object controller) {
-		Method[] methods = controller.getClass().getDeclaredMethods();
-		for (Method method : methods) {
-			if(uri.equals("/")){
-				this.addRoute(uri  + method.getName(), controller, method.getName());
-			}else{
-				this.addRoute(uri + "/" + method.getName(), controller, method.getName());
+	public void addRoute(String uri, Class<?> clazz) {
+		try {
+			Object controller = clazz.newInstance();
+			Method[] methods = clazz.getDeclaredMethods();
+			for (Method method : methods) {
+				if(uri.equals("/")){
+					this.addRoute(uri  + method.getName(), controller, method.getName());
+				}else{
+					this.addRoute(uri + "/" + method.getName(), controller, method.getName());
+				}
 			}
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * 查询route
 	 * 

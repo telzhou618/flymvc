@@ -30,15 +30,30 @@ public class Req {
 	}
 	
 	public Integer  getParaToInt(String name) {
-		return Integer.parseInt(request.getParameter(name));
+		try {
+			return Integer.parseInt(request.getParameter(name));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			throw new NumberFormatException( name +" must be integer type");
+		}
 	}
 
 	public Float  getParaToFloat(String name) {
-		return Float.parseFloat(request.getParameter(name));
+		try {
+			return Float.parseFloat(request.getParameter(name));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			throw new NumberFormatException( name +" must be float type");
+		}
 	}
 
 	public Double  getParaToDouble(String name) {
-		return Double.parseDouble(request.getParameter(name));
+		try {
+			return Double.parseDouble(request.getParameter(name));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			throw new NumberFormatException( name +" must be double type");
+		}
 	}
 	
 	public String[]  getParas(String name) {

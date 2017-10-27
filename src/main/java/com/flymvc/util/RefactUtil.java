@@ -23,7 +23,7 @@ public class RefactUtil {
 			}
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 
 		return result;
