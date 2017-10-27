@@ -15,9 +15,9 @@
 	 */
 	@Override
 	public void route(Routes routes) {
-		routes.addRoute("/user", new UserController());
-		routes.addRoute("/", new IndexController());
-		routes.addRoute("/", new IndexController(),"index");
+		routes.addRoute("/user",UserController.class);
+		routes.addRoute("/", IndexController.class);
+		routes.addRoute("/", IndexController.class,"index");
 	}
 	/**
 	 * 插件
