@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.flymvc.annotation.RespJson;
+import com.flymvc.annotation.Rson;
 import com.flymvc.bean.ModelRender;
 import com.flymvc.bean.Param;
 import com.flymvc.interceptor.Interceptors;
@@ -98,7 +98,7 @@ public class FlyMvcServlet extends HttpServlet {
 			// 执行invoke
 			Object result = RefactUtil.invoke(method, controller, args);
 			// 处理执行结果
-			RespJson respJson = method.getAnnotation(RespJson.class);
+			Rson respJson = method.getAnnotation(Rson.class);
 			if (respJson != null) {
 				AjaxUtil.render(request, response, result);
 			} else if (result != null) {
