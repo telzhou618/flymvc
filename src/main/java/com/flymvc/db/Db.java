@@ -95,8 +95,4 @@ public class Db {
 		ttable.setColumns(tcolumns.toArray(new TColumn[]{}));
 		return ttable;
 	}
-
-	
-	
-	
 }
