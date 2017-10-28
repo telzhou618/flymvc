@@ -47,9 +47,9 @@ public class FlyMvcServlet extends HttpServlet {
 		String className = config.getInitParameter("bootstrap");
 		BootStrap bootStrap = this.getBootStrap(className);
 		try {
-			Fly.init(bootStrap);
 			fly = Fly.me();
-			logger.info("FlyMvc init success!");
+			fly.init(bootStrap);
+			logger.info("flymvc init success!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

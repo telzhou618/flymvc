@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.flymvc.util.MethodUtil;
 
 /**
@@ -12,11 +14,14 @@ import com.flymvc.util.MethodUtil;
  *
  */
 public class Routes {
+	
+	private static Logger logger = Logger.getLogger(Routes.class);
 
 	private Set<Route> routes;
 
 	public void addRoute(Route route) {
 		this.routes.add(route);
+		logger.debug("uri:["+route.getUri()+"],ctrm:["+route.getController().getClass().getName()+"."+route.getMethod().getName()+"()]");
 	}
 
 	

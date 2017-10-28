@@ -1,5 +1,7 @@
 package com.flymvc;
 
+import org.apache.log4j.Logger;
+
 import com.flymvc.config.Config;
 import com.flymvc.interceptor.Interceptors;
 import com.flymvc.plugin.Plugins;
@@ -13,6 +15,8 @@ import com.flymvc.util.PluginUtil;
  *
  */
 public class Fly {
+	
+	private static Logger logger = Logger.getLogger(Fly.class);
 	
 	/**
 	 * 配置
@@ -37,8 +41,15 @@ public class Fly {
 	 * 拦截器集合
 	 */
 	private Interceptors interceptors;
+	/**
+	 * fly
+	 */
+	private static Fly  fly ;
 	
-	private static Fly  fly = null;
+	/**
+	 * 是否已初始化
+	 */
+	private static boolean isInit = false;
 
 	public Config getConfig() {
 		return config;
@@ -91,25 +102,29 @@ public class Fly {
 		this.interceptors = new Interceptors();
 	}
 	
-	/**
-	 * 获取单例对象
-	 * @param bootStrap 
-	 * @return
-	 */
-	public static void init(BootStrap bootStrap) throws Exception{
-		if(fly== null){
-			fly = new Fly();
+	
+	public void init(BootStrap bootStrap) throws Exception{
+		if(!isInit){
 			bootStrap.config(fly.getConfig());
 			bootStrap.plugin(fly.getPlugins());
 			bootStrap.route(fly.getRoutes());
 			fly.setRender(bootStrap.render());
 			PluginUtil.initPlugins(fly.getPlugins());
 			bootStrap.interceptor(fly.getInterceptors());
+			isInit = true;
+			logger.debug("fly init finish .");
 		}
 	}
+	
+	/**
+	 * 获取单例对象
+	 * @param bootStrap 
+	 * @return
+	 */
 	public static Fly me(){
-		if(fly==null){
-			throw new RuntimeException("fly is null");
+		if(fly == null){
+			fly = new Fly();
+			logger.debug("please init fly ?");
 		}
 		return fly;
 	}
