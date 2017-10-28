@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * table 忽略
+ * 
  * @author jameszhou
  *
  */
@@ -15,7 +16,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Ignore {
-	
-	String value() default "";
-	
 }
